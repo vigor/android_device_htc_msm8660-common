@@ -1,3 +1,5 @@
+ifeq ($(BOARD_VENDOR),htc)
+ifeq ($(TARGET_BOARD_PLATFORM),msm8660)
 ifeq ($(CAMERA_USES_SURFACEFLINGER_CLIENT_STUB),true)
 
 LOCAL_PATH := $(call my-dir)
@@ -11,4 +13,6 @@ LOCAL_MODULE := libsurfaceflinger_client
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif
+endif # CAMERA_USES_SURFACEFLINGER_CLIENT_STUB
+endif # TARGET_BOARD_PLATFORM
+endif # BOARD_VENDOR
