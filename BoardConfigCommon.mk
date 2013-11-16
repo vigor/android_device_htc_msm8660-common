@@ -113,3 +113,32 @@ TARGET_PROVIDES_LIBLIGHTS := true
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := device/htc/msm8660-common/cmhw
+
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+    device/samsung/msm8660-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    app.te \
+    bluetooth.te \
+    device.te \
+    domain.te \
+    drmserver.te \
+    file_contexts \
+    files \
+    file.te \
+    hci_init.te \
+    healthd.te \
+    init.te \
+    init_shell.te \
+    keystore.te \
+    kickstart.te \
+    mediaserver.te \
+    rild.te \
+    surfaceflinger.te \
+    system.te \
+    ueventd.te \
+    untrusted_app.te \
+    vold.te \
+    wpa.te \
+    wpa_socket.te
