@@ -126,6 +126,7 @@ static char * camera_fixup_getparams(int id, const char * settings)
 
 char * camera_fixup_setparams(int id, const char * settings)
 {
+    bool isVideo = false;
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
@@ -134,6 +135,11 @@ char * camera_fixup_setparams(int id, const char * settings)
     
     //Workaround for crash when touch to focus is used with flash on.
     params.set(android::CameraParameters::KEY_AUTO_EXPOSURE_LOCK, "false");
+
+    // Enable video mode for our HTC camera
+    //   old overlay: needsHtcCamMode
+    //   reference: http://review.cyanogenmod.org/#/c/53595
+    params.set("cam-mode", isVideo ? "1" : "0");
 
     ALOGD("%s: set parameters fixed up", __FUNCTION__);
     return ret;
