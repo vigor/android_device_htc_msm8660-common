@@ -139,6 +139,10 @@ char * camera_fixup_setparams(int id, const char * settings)
     // Enable video mode for our HTC camera
     //   old overlay: needsHtcCamMode
     //   reference: http://review.cyanogenmod.org/#/c/53595
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+         isVideo = !strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true");
+    }
+
     params.set("cam-mode", isVideo ? "1" : "0");
 
     ALOGD("%s: set parameters fixed up", __FUNCTION__);
