@@ -89,10 +89,6 @@ PRODUCT_PACKAGES += \
     libnetcmdiface \
     libsurfaceflinger_client
 
-# GooManager
-PRODUCT_PACKAGES += \
-    GooManager
-
 # Power
 PRODUCT_PACKAGES += \
     power.msm8660

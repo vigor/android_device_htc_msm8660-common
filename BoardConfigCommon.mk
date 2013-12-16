@@ -20,7 +20,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/htc/msm8660-common/include
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-TARGET_KERNEL_SOURCE := /home/sultan/sultan-kernel-pyramid
+TARGET_KERNEL_SOURCE := kernel/htc/vigor-3.0
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8660
@@ -102,11 +102,6 @@ TARGET_PROVIDES_LIBLIGHTS := true
 
 # Power
 TARGET_USES_CM_POWERHAL := true
-
-# Recovery
-TARGET_RECOVERY_FSTAB := device/htc/pyramid/ramdisk/fstab.pyramid
-RECOVERY_FSTAB_VERSION := 2
-USE_SET_METADATA := false
 
 # Webkit
 ENABLE_WEBGL := true
