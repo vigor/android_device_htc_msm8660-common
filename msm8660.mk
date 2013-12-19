@@ -133,4 +133,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     dev.pm.dyn_samplingrate=1 \
     ro.opengles.version=131072 \
-    ro.bq.gpu_to_cpu_unsupported=1
+    debug.egl.recordable.rgba8888=1
