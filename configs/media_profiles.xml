@@ -166,7 +166,7 @@
 
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="20000000"
+                   bitRate="12000000"
                    width="1920"
                    height="1088"
                    frameRate="30" />
@@ -230,7 +230,7 @@
 
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="20000000"
+                   bitRate="12000000"
                    width="1920"
                    height="1088"
                    frameRate="30" />
@@ -335,19 +335,19 @@
         minBitRate="64000" maxBitRate="20000000"
         minFrameWidth="176" maxFrameWidth="1920"
         minFrameHeight="144" maxFrameHeight="1088"
-        minFrameRate="1" maxFrameRate="60" />
+        minFrameRate="15" maxFrameRate="30" />
 
     <VideoEncoderCap name="h263" enabled="true"
-        minBitRate="64000" maxBitRate="4000000"
+        minBitRate="64000" maxBitRate="20000000"
         minFrameWidth="176" maxFrameWidth="800"
         minFrameHeight="144" maxFrameHeight="480"
-        minFrameRate="1" maxFrameRate="31" />
+        minFrameRate="15" maxFrameRate="30" />
 
     <VideoEncoderCap name="m4v" enabled="true"
-        minBitRate="64000" maxBitRate="8000000"
+        minBitRate="64000" maxBitRate="20000000"
         minFrameWidth="176" maxFrameWidth="1280"
         minFrameHeight="144" maxFrameHeight="720"
-        minFrameRate="1" maxFrameRate="31" />
+        minFrameRate="15" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
         minBitRate="8000" maxBitRate="96000"
@@ -391,7 +391,7 @@
     <!--
       Codec = h.263, Baseline profile, level 70
     -->
-    <ExportVideoProfile name="h263" profile= "1" level="128"/>
+    <ExportVideoProfile name="h263" profile= "1" level="1"/>
     <!--
       Codec = mpeg4, Simple profile, level 5
     -->
