@@ -125,6 +125,18 @@ static char *camera_fixup_getparams(int id, const char *settings)
         params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "42.2");
 
     }
+    // Some QCOM related framework changes expect max-saturation, max-contrast
+    // and max-sharpness or the Camera app will crash.
+    const char* value;
+    if((value = params.get("saturation-max"))) {
+        params.set("max-saturation", value);
+    }
+    if((value = params.get("contrast-max"))) {
+        params.set("max-contrast", value);
+    }
+    if((value = params.get("sharpness-max"))) {
+        params.set("max-sharpness", value);
+    }
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
