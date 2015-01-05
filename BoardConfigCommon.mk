@@ -112,3 +112,6 @@ TARGET_FORCE_CPU_UPLOAD := true
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := device/htc/msm8660-common/cmhw/
+
+# SELinux
+-include device/qcom/sepolicy/sepolicy.mk
