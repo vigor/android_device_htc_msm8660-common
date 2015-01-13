@@ -133,6 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     dev.pm.dyn_samplingrate=1 \
     ro.opengles.version=131072 \
+    ro.bq.gpu_to_cpu_unsupported=1 \
     debug.hwc.dynThreshold=1.9 \
     lpa.decode=false \
     debug.sf.no_hw_vsync=1 \
