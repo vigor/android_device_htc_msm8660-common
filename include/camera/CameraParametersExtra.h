@@ -25,16 +25,22 @@ const char CameraParameters::AUTO_EXPOSURE_FRAME_AVG[] = "frame-average"; \
 const char CameraParameters::AUTO_EXPOSURE_SPOT_METERING[] = "spot-metering"; \
 const char CameraParameters::BURST_MODE_LIMIT20[] = "limit-20"; \
 const char CameraParameters::BURST_MODE_UNLIMITED[] = "unlimited"; \
+const char CameraParameters::CAF_OFF[] = "caf-off"; \
+const char CameraParameters::CAF_ON[] = "caf-on"; \
+const char CameraParameters::CAPTURE_MODE_BURST[] = "burst"; \
 const char CameraParameters::CAPTURE_MODE_CONTI_BURST_ONE_SHOT[] = "contiburst-one-shot"; \
 const char CameraParameters::CAPTURE_MODE_CONTI_BURST[] = "contiburst"; \
 const char CameraParameters::CAPTURE_MODE_CONTI_ZOE[] = "contizoe"; \
 const char CameraParameters::CAPTURE_MODE_EIS[] = "eis"; \
 const char CameraParameters::CAPTURE_MODE_HDR[] = "hdr"; \
+const char CameraParameters::CAPTURE_MODE_HJR[] = "hjr"; \
 const char CameraParameters::CAPTURE_MODE_NORMAL[] = "normal"; \
 const char CameraParameters::CAPTURE_MODE_PANORAMA[] = "panorama"; \
 const char CameraParameters::CAPTURE_MODE_ZOE[] = "zoe"; \
 const char CameraParameters::CONTI_BURST_CAPTURE_DONE[] = "contiburst-done"; \
 const char CameraParameters::CONTI_BURST_CAPTURING[] = "contiburst-capturing"; \
+const char CameraParameters::CONTINUOUS_AF_OFF[] = "caf-off"; \
+const char CameraParameters::CONTINUOUS_AF_ON[] = "caf-on"; \
 const char CameraParameters::DENOISE_OFF[] = "denoise-off"; \
 const char CameraParameters::DENOISE_ON[] = "denoise-on"; \
 const char CameraParameters::EFFECT_EMBOSS[] = "emboss"; \
@@ -42,6 +48,7 @@ const char CameraParameters::EFFECT_NEON[] = "neon"; \
 const char CameraParameters::EFFECT_SKETCH[] = "sketch"; \
 const char CameraParameters::FACE_DETECTION_OFF[] = "off"; \
 const char CameraParameters::FACE_DETECTION_ON[] = "on"; \
+const char CameraParameters::FOCUS_MODE_CONTINUOUS_CAMERA[] = "continuous-camera"; \
 const char CameraParameters::FOCUS_MODE_NORMAL[] = "normal"; \
 const char CameraParameters::HDR_DISABLE[] = "disable"; \
 const char CameraParameters::HDR_ENABLE[] = "enable"; \
@@ -59,10 +66,12 @@ const char CameraParameters::ISO_HJR[] = "ISO_HJR"; \
 const char CameraParameters::KEY_AE_BRACKET_HDR[] = "ae-bracket-hdr"; \
 const char CameraParameters::KEY_APP_OIS_SETTING[] = "ois-setting"; \
 const char CameraParameters::KEY_AUTO_EXPOSURE[] = "auto-exposure"; \
+const char CameraParameters::KEY_CAF[] = "continuous-af"; \
 const char CameraParameters::KEY_CAMERA_MODE[] = "camera-mode"; \
 const char CameraParameters::KEY_CAPTURE_MODE[] = "capture-mode"; \
 const char CameraParameters::KEY_CONTI_BURST_STATE[] = "contiburst-state"; \
 const char CameraParameters::KEY_CONTIBURST_TYPE[] = "contiburst-type"; \
+const char CameraParameters::KEY_CONTINUOUS_AF[] = "continuous-af"; \
 const char CameraParameters::KEY_CONTRAST[] = "contrast"; \
 const char CameraParameters::KEY_DEF_CONTRAST[] = "contrast-def"; \
 const char CameraParameters::KEY_DEF_SATURATION[] = "saturation-def"; \
@@ -84,15 +93,18 @@ const char CameraParameters::KEY_HIGH_DYNAMIC_RANGE_IMAGING[] = "hdr"; \
 const char CameraParameters::KEY_HISTOGRAM[] = "histogram"; \
 const char CameraParameters::KEY_ISO_MODE[] = "iso"; \
 const char CameraParameters::KEY_LENSSHADE[] = "lensshade"; \
-const char CameraParameters::KEY_MAX_CONTRAST[] = "max-contrast"; \
-const char CameraParameters::KEY_MAX_SATURATION[] = "max-saturation"; \
-const char CameraParameters::KEY_MAX_SHARPNESS[] = "max-sharpness"; \
+const char CameraParameters::KEY_MAX_BURST_PICTURE_COUNT[] = "max-burst-picture-count"; \
+const char CameraParameters::KEY_MAX_CONTRAST[] = "contrast-max"; \
+const char CameraParameters::KEY_MAX_SATURATION[] = "saturation-max"; \
+const char CameraParameters::KEY_MAX_SHARPNESS[] = "sharpness-max"; \
 const char CameraParameters::KEY_MEMORY_COLOR_ENHANCEMENT[] = "mce"; \
 const char CameraParameters::KEY_MIN_CONTRAST[] = "contrast-min"; \
 const char CameraParameters::KEY_MIN_SATURATION[] = "saturation-min"; \
 const char CameraParameters::KEY_MIN_SHARPNESS[] = "sharpness-min"; \
 const char CameraParameters::KEY_OIS_MODE[] = "ois_mode"; \
 const char CameraParameters::KEY_OIS_SUPPORT[] = "ois_support"; \
+const char CameraParameters::KEY_PANORAMA_MODE[] = "panorama-mode"; \
+const char CameraParameters::KEY_PICTURE_COUNT[] = "picture-count"; \
 const char CameraParameters::KEY_POWER_MODE_SUPPORTED[] = "power-mode-supported"; \
 const char CameraParameters::KEY_POWER_MODE[] = "power-mode"; \
 const char CameraParameters::KEY_PREVIEW_FRAME_RATE_AUTO_MODE[] = "frame-rate-auto"; \
@@ -106,7 +118,9 @@ const char CameraParameters::KEY_SHARPNESS[] = "sharpness"; \
 const char CameraParameters::KEY_SINGLE_ISP_OUTPUT_ENABLED[] = "single-isp-output-enabled"; \
 const char CameraParameters::KEY_SKIN_TONE_ENHANCEMENT[] = "skinToneEnhancement"; \
 const char CameraParameters::KEY_SUPPORTED_AUTO_EXPOSURE[] = "auto-exposure-values"; \
+const char CameraParameters::KEY_SUPPORTED_CAF[] = "continuous-af-values"; \
 const char CameraParameters::KEY_SUPPORTED_CAPTURE_MODES[] = "capture-mode-values"; \
+const char CameraParameters::KEY_SUPPORTED_CONTINUOUS_AF[] = "continuous-af-mode"; \
 const char CameraParameters::KEY_SUPPORTED_DENOISE[] = "denoise-values"; \
 const char CameraParameters::KEY_SUPPORTED_FACE_DETECTION[] = "face-detection-values"; \
 const char CameraParameters::KEY_SUPPORTED_HDR_IMAGING_MODES[] = "hdr-values"; \
@@ -123,6 +137,7 @@ const char CameraParameters::KEY_SUPPORTED_SKIN_TONE_ENHANCEMENT_MODES[] = "skin
 const char CameraParameters::KEY_SUPPORTED_TOUCH_AF_AEC[] = "touch-af-aec-values"; \
 const char CameraParameters::KEY_SUPPORTED_VIDEO_HIGH_FRAME_RATE_MODES[] = "video-hfr-values"; \
 const char CameraParameters::KEY_SUPPORTED_ZSL_MODES[] = "zsl-values"; \
+const char CameraParameters::KEY_TAKING_PICTURE_ZOOM[] = "taking-picture-zoom"; \
 const char CameraParameters::KEY_TIME_CONS_POST_PROCESSING[] = "time-cons-post-processing"; \
 const char CameraParameters::KEY_TOUCH_AF_AEC[] = "touch-af-aec"; \
 const char CameraParameters::KEY_TOUCH_INDEX_AEC[] = "touch-index-aec"; \
@@ -137,6 +152,8 @@ const char CameraParameters::MCE_ENABLE[] = "enable"; \
 const char CameraParameters::NORMAL_POWER[] = "Normal_Power"; \
 const char CameraParameters::OIS_MODE_OFF[] = "off"; \
 const char CameraParameters::OIS_MODE_ON[] = "on"; \
+const char CameraParameters::PANORAMA_MODE_INPROGRESS[] = "in-progress"; \
+const char CameraParameters::PANORAMA_MODE_NOT_INPROGRESS[] = "not-in-progress"; \
 const char CameraParameters::PIXEL_FORMAT_NV12[] = "nv12"; \
 const char CameraParameters::PIXEL_FORMAT_RAW[] = "raw"; \
 const char CameraParameters::PIXEL_FORMAT_YUV420SP_ADRENO[] = "yuv420sp-adreno"; \
@@ -209,6 +226,9 @@ void CameraParameters::setOrientation(int orientation) \
          set("orientation", landscape); \
     } \
 } \
+void CameraParameters::setPostviewSize(int width, int height) \
+{ \
+} \
 void CameraParameters::getSupportedHfrSizes(Vector<Size> &sizes) const \
 { \
     const char *hfrSizesStr = get(KEY_SUPPORTED_HFR_SIZES); \
@@ -266,7 +286,7 @@ void CameraParameters::getMeteringAreaCenter(int *x, int *y) const \
     const char *p = get(KEY_METERING_AREAS); \
     if(p != NULL) { \
         int arr[5] = {-2000, -2000, -2000, -2000, 0}; \
-        parseNDimVector(p, arr, 5, ',');		      \
+        parseNDimVector(p, arr, 5, ','); \
         *x = (arr[0] + arr[2])/2; \
         *y = (arr[1] + arr[3])/2; \
     } \
@@ -316,16 +336,22 @@ struct FPSRange{ \
     static const char AUTO_EXPOSURE_SPOT_METERING[]; \
     static const char BURST_MODE_LIMIT20[]; \
     static const char BURST_MODE_UNLIMITED[]; \
+    static const char CAF_OFF[]; \
+    static const char CAF_ON[]; \
+    static const char CAPTURE_MODE_BURST[]; \
     static const char CAPTURE_MODE_CONTI_BURST_ONE_SHOT[]; \
     static const char CAPTURE_MODE_CONTI_BURST[]; \
     static const char CAPTURE_MODE_CONTI_ZOE[]; \
     static const char CAPTURE_MODE_EIS[]; \
     static const char CAPTURE_MODE_HDR[]; \
+    static const char CAPTURE_MODE_HJR[]; \
     static const char CAPTURE_MODE_NORMAL[]; \
     static const char CAPTURE_MODE_PANORAMA[]; \
     static const char CAPTURE_MODE_ZOE[]; \
     static const char CONTI_BURST_CAPTURE_DONE[]; \
     static const char CONTI_BURST_CAPTURING[]; \
+    static const char CONTINUOUS_AF_OFF[]; \
+    static const char CONTINUOUS_AF_ON[]; \
     static const char DENOISE_OFF[]; \
     static const char DENOISE_ON[]; \
     static const char EFFECT_EMBOSS[]; \
@@ -333,6 +359,7 @@ struct FPSRange{ \
     static const char EFFECT_SKETCH[]; \
     static const char FACE_DETECTION_OFF[]; \
     static const char FACE_DETECTION_ON[]; \
+    static const char FOCUS_MODE_CONTINUOUS_CAMERA[]; \
     static const char FOCUS_MODE_NORMAL[]; \
     static const char HDR_DISABLE[]; \
     static const char HDR_ENABLE[]; \
@@ -350,10 +377,12 @@ struct FPSRange{ \
     static const char KEY_AE_BRACKET_HDR[]; \
     static const char KEY_APP_OIS_SETTING[]; \
     static const char KEY_AUTO_EXPOSURE[]; \
+    static const char KEY_CAF[]; \
     static const char KEY_CAMERA_MODE[]; \
     static const char KEY_CAPTURE_MODE[]; \
     static const char KEY_CONTI_BURST_STATE[]; \
     static const char KEY_CONTIBURST_TYPE[]; \
+    static const char KEY_CONTINUOUS_AF[]; \
     static const char KEY_CONTRAST[]; \
     static const char KEY_DEF_CONTRAST[]; \
     static const char KEY_DEF_SATURATION[]; \
@@ -375,6 +404,7 @@ struct FPSRange{ \
     static const char KEY_HISTOGRAM[] ; \
     static const char KEY_ISO_MODE[]; \
     static const char KEY_LENSSHADE[] ; \
+    static const char KEY_MAX_BURST_PICTURE_COUNT[]; \
     static const char KEY_MAX_CONTRAST[]; \
     static const char KEY_MAX_SATURATION[]; \
     static const char KEY_MAX_SHARPNESS[]; \
@@ -384,6 +414,8 @@ struct FPSRange{ \
     static const char KEY_MIN_SHARPNESS[]; \
     static const char KEY_OIS_MODE[]; \
     static const char KEY_OIS_SUPPORT[]; \
+    static const char KEY_PANORAMA_MODE[]; \
+    static const char KEY_PICTURE_COUNT[]; \
     static const char KEY_POWER_MODE_SUPPORTED[]; \
     static const char KEY_POWER_MODE[]; \
     static const char KEY_PREVIEW_FRAME_RATE_AUTO_MODE[]; \
@@ -397,7 +429,9 @@ struct FPSRange{ \
     static const char KEY_SINGLE_ISP_OUTPUT_ENABLED[]; \
     static const char KEY_SKIN_TONE_ENHANCEMENT[]; \
     static const char KEY_SUPPORTED_AUTO_EXPOSURE[]; \
+    static const char KEY_SUPPORTED_CAF[]; \
     static const char KEY_SUPPORTED_CAPTURE_MODES[]; \
+    static const char KEY_SUPPORTED_CONTINUOUS_AF[]; \
     static const char KEY_SUPPORTED_DENOISE[]; \
     static const char KEY_SUPPORTED_FACE_DETECTION[]; \
     static const char KEY_SUPPORTED_HDR_IMAGING_MODES[]; \
@@ -414,6 +448,7 @@ struct FPSRange{ \
     static const char KEY_SUPPORTED_TOUCH_AF_AEC[]; \
     static const char KEY_SUPPORTED_VIDEO_HIGH_FRAME_RATE_MODES[]; \
     static const char KEY_SUPPORTED_ZSL_MODES[]; \
+    static const char KEY_TAKING_PICTURE_ZOOM[]; \
     static const char KEY_TIME_CONS_POST_PROCESSING[]; \
     static const char KEY_TOUCH_AF_AEC[]; \
     static const char KEY_TOUCH_INDEX_AEC[]; \
@@ -428,6 +463,8 @@ struct FPSRange{ \
     static const char NORMAL_POWER[]; \
     static const char OIS_MODE_OFF[]; \
     static const char OIS_MODE_ON[]; \
+    static const char PANORAMA_MODE_INPROGRESS[]; \
+    static const char PANORAMA_MODE_NOT_INPROGRESS[]; \
     static const char PIXEL_FORMAT_NV12[]; \
     static const char PIXEL_FORMAT_RAW[]; \
     static const char PIXEL_FORMAT_YUV420SP_ADRENO[]; \
@@ -466,5 +503,6 @@ struct FPSRange{ \
     int getOrientation() const; \
     void setOrientation(int orientation); \
     void setPreviewFpsRange(int minFPS,int maxFPS); \
+    void setPostviewSize(int x, int y); \
     void getSupportedHfrSizes(Vector<Size> &sizes) const; \
     void getMeteringAreaCenter(int * x, int *y) const; \
