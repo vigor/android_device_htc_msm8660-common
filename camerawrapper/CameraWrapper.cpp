@@ -1,18 +1,18 @@
 /*
-* Copyright (C) 2012, The CyanogenMod Project
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (C) 2012, The CyanogenMod Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 /**
 * @file CameraWrapper.cpp
@@ -21,9 +21,7 @@
 *
 */
 
-
-#define LOG_NDEBUG 0
-#define LOG_PARAMETERS
+//#define LOG_NDEBUG 0
 
 #define LOG_TAG "CameraWrapper"
 #include <cutils/log.h>
@@ -40,14 +38,13 @@ static camera_module_t *gVendorModule = 0;
 
 static char **fixed_set_params = NULL;
 
-static int camera_device_open(const hw_module_t* module, const char* name,
-                hw_device_t** device);
-static int camera_device_close(hw_device_t* device);
+static int camera_device_open(const hw_module_t *module, const char *name,
+        hw_device_t **device);
 static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
 
 static struct hw_module_methods_t camera_module_methods = {
-        .open = camera_device_open,
+    .open = camera_device_open,
 };
 
 camera_module_t HAL_MODULE_INFO_SYM = {
@@ -56,8 +53,8 @@ camera_module_t HAL_MODULE_INFO_SYM = {
          .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
-         .name = "msm8660 Camera Wrapper",
-         .author = "IPZ <illespal@gmail.com>",
+         .name = "MSM8660 Camera Wrapper",
+         .author = "The CyanogenMod Project",
          .methods = &camera_module_methods,
          .dso = NULL, /* remove compilation warnings */
          .reserved = {0}, /* remove compilation warnings */
@@ -76,8 +73,8 @@ typedef struct wrapper_camera_device {
 } wrapper_camera_device_t;
 
 #define VENDOR_CALL(device, func, ...) ({ \
-wrapper_camera_device_t *__wrapper_dev = (wrapper_camera_device_t*) device; \
-__wrapper_dev->vendor->ops->func(__wrapper_dev->vendor, ##__VA_ARGS__); \
+    wrapper_camera_device_t *__wrapper_dev = (wrapper_camera_device_t*) device; \
+    __wrapper_dev->vendor->ops->func(__wrapper_dev->vendor, ##__VA_ARGS__); \
 })
 
 #define CAMERA_ID(device) (((wrapper_camera_device_t *)(device))->id)
@@ -91,14 +88,11 @@ static int check_vendor_module()
         return 0;
 
     rv = hw_get_module_by_class("camera", "vendor",
-            (const hw_module_t **)&gVendorModule);
+            (const hw_module_t**)&gVendorModule);
     if (rv)
         ALOGE("failed to open vendor camera module");
-
     return rv;
 }
-
-const static char *previewSizesStr[] = {"1920x1088,1280x720,960x544,800x480,720x480,640x480,640x368,480x320,320x240"};
 
 static char *camera_fixup_getparams(int id, const char *settings)
 {
@@ -110,23 +104,23 @@ static char *camera_fixup_getparams(int id, const char *settings)
     params.dump();
 #endif
 
-    // fix params here
-    if (id == 0) {
-        params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES, previewSizesStr[id]);
-        params.set(android::CameraParameters::KEY_PREVIEW_FRAME_RATE, "30");
-        params.set(android::CameraParameters::KEY_AUTO_EXPOSURE_LOCK, "false");
-        params.set(android::CameraParameters::KEY_ANTIBANDING, "auto");
-        params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, "frame-average");
-        params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
-        params.set(android::CameraParameters::KEY_SKIN_TONE_ENHANCEMENT, "enable");
-        params.set(android::CameraParameters::KEY_FOCAL_LENGTH, "3.49");
-        params.set(android::CameraParameters::KEY_FOCUS_DISTANCES, "1.000000,32.000000,32.000000");
-        params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
-        params.set(android::CameraParameters::KEY_TOUCH_AF_AEC, "touch-on");
-        params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "54.4");
-        params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "42.2");
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
 
-    }
+    params.set(android::CameraParameters::KEY_PREVIEW_FRAME_RATE, "30");
+    params.set(android::CameraParameters::KEY_AUTO_EXPOSURE_LOCK, "false");
+    params.set(android::CameraParameters::KEY_ANTIBANDING, "auto");
+    params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, "frame-average");
+    params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
+    params.set(android::CameraParameters::KEY_SKIN_TONE_ENHANCEMENT, "enable");
+    params.set(android::CameraParameters::KEY_FOCAL_LENGTH, "3.49");
+    params.set(android::CameraParameters::KEY_FOCUS_DISTANCES, "1.000000,32.000000,32.000000");
+    params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
+    params.set(android::CameraParameters::KEY_TOUCH_AF_AEC, "touch-on");
+    params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "54.4");
+    params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "42.2");
+
     // Some QCOM related framework changes expect max-saturation, max-contrast
     // and max-sharpness or the Camera app will crash.
     const char* value;
@@ -154,7 +148,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
 static char *camera_fixup_setparams(int id, const char *settings)
 {
     bool isVideo = false;
-
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
@@ -163,15 +156,30 @@ static char *camera_fixup_setparams(int id, const char *settings)
     params.dump();
 #endif
 
-    //Workaround for crash when touch to focus is used with flash on.
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
+
+    params.set(android::CameraParameters::KEY_PREVIEW_FRAME_RATE, "30");
     params.set(android::CameraParameters::KEY_AUTO_EXPOSURE_LOCK, "false");
+    params.set(android::CameraParameters::KEY_ANTIBANDING, "auto");
+    params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, "frame-average");
+    params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
+    params.set(android::CameraParameters::KEY_SKIN_TONE_ENHANCEMENT, "enable");
+    params.set(android::CameraParameters::KEY_FOCAL_LENGTH, "3.49");
+    params.set(android::CameraParameters::KEY_FOCUS_DISTANCES, "1.000000,32.000000,32.000000");
+    params.set(android::CameraParameters::KEY_SCENE_DETECT, "on");
+    params.set(android::CameraParameters::KEY_TOUCH_AF_AEC, "touch-on");
+    params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "54.4");
+    params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "42.2");
 
     // Enable video mode for our HTC camera
-    // old overlay: needsHtcCamMode
-    // reference: http://review.cyanogenmod.org/#/c/53595
+    //   old overlay: needsHtcCamMode
+    //   reference: http://review.cyanogenmod.org/#/c/53595
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
          isVideo = !strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true");
     }
+
     params.set("cam-mode", isVideo ? "1" : "0");
 
 #if !LOG_NDEBUG
@@ -189,8 +197,8 @@ static char *camera_fixup_setparams(int id, const char *settings)
 }
 
 /*******************************************************************
-* implementation of camera_device_ops functions
-*******************************************************************/
+ * implementation of camera_device_ops functions
+ *******************************************************************/
 
 static int camera_set_preview_window(struct camera_device *device,
         struct preview_stream_ops *window)
@@ -198,7 +206,7 @@ static int camera_set_preview_window(struct camera_device *device,
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
-    if (!device || !window)
+    if (!device)
         return -EINVAL;
 
     return VENDOR_CALL(device, set_preview_window, window);
@@ -355,6 +363,7 @@ static int camera_auto_focus(struct camera_device *device)
     if (!device)
         return -EINVAL;
 
+
     return VENDOR_CALL(device, auto_focus);
 }
 
@@ -442,16 +451,7 @@ static int camera_send_command(struct camera_device *device,
     if (!device)
         return -EINVAL;
 
-    /* send_command may cause the camera hal do to unexpected things like lockups.
-* we assume it wont. if it does so, prevent this by returning 0 */
-    if (cmd == 6) {
-        /* this command causes seg fault and camera crashes as this send_command calls
-* for proprietary face detection models not supported in our framework */
-        ALOGV("send_command related to face detection suppressed");
-        return 0;
-    } else {
-        return VENDOR_CALL(device, send_command, cmd, arg1, arg2);
-    }
+    return VENDOR_CALL(device, send_command, cmd, arg1, arg2);
 }
 
 static void camera_release(struct camera_device *device)
@@ -478,7 +478,7 @@ static int camera_dump(struct camera_device *device, int fd)
 
 extern "C" void heaptracker_free_leaked_memory(void);
 
-static int camera_device_close(hw_device_t* device)
+static int camera_device_close(hw_device_t *device)
 {
     int ret = 0;
     wrapper_camera_device_t *wrapper_dev = NULL;
@@ -511,14 +511,14 @@ done:
 }
 
 /*******************************************************************
-* implementation of camera_module functions
-*******************************************************************/
+ * implementation of camera_module functions
+ *******************************************************************/
 
 /* open device handle to one of the cameras
-*
-* assume camera service will keep singleton of each camera
-* so this function will always only be called once per camera instance
-*/
+ *
+ * assume camera service will keep singleton of each camera
+ * so this function will always only be called once per camera instance
+ */
 
 static int camera_device_open(const hw_module_t *module, const char *name,
         hw_device_t **device)
@@ -635,21 +635,15 @@ fail:
 static int camera_get_number_of_cameras(void)
 {
     ALOGV("%s", __FUNCTION__);
-
     if (check_vendor_module())
         return 0;
-
     return gVendorModule->get_number_of_cameras();
 }
 
 static int camera_get_camera_info(int camera_id, struct camera_info *info)
 {
     ALOGV("%s", __FUNCTION__);
-
     if (check_vendor_module())
         return 0;
-
     return gVendorModule->get_camera_info(camera_id, info);
 }
-
-
