@@ -53,11 +53,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio_policy.msm8660 \
     audio.primary.msm8660 \
-    audio_policy.conf \
-    libaudioutils \
-    libaudio-resampler \
     audio.usb.default \
-    Camera2
+    libaudio-resampler \
+    libaudioutils
+
+PRODUCT_COPY_FILES += \
+    device/htc/msm8660-common/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # GPS
 PRODUCT_COPY_FILES += \
