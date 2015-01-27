@@ -90,7 +90,11 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxEvrcEnc \
     libv8 \
-    libOmxAmrEnc
+    libOmxAmrEnc \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 PRODUCT_PACKAGES += \
     camera.msm8660 \
